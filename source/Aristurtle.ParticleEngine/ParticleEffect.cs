@@ -30,7 +30,7 @@ public class ParticleEffect : IDisposable
     public void FastForward(Vector2 position, float seconds, float triggerPeriod)
     {
         float time = 0.0f;
-        while(time < seconds)
+        while (time < seconds)
         {
             Update(triggerPeriod);
             Trigger(position);
@@ -63,7 +63,7 @@ public class ParticleEffect : IDisposable
     {
         ObjectDisposedException.ThrowIf(IsDisposed, typeof(ParticleBuffer));
 
-        for(int i = 0; i < Emitters.Count; i++)
+        for (int i = 0; i < Emitters.Count; i++)
         {
             Emitters[i].Trigger(line, layerDepth);
         }
@@ -87,11 +87,11 @@ public class ParticleEffect : IDisposable
 
     private void Dispose(bool disposing)
     {
-        if(IsDisposed) { return; }
+        if (IsDisposed) { return; }
 
-        if(disposing)
+        if (disposing)
         {
-            for(int i = 0; i < Emitters.Count; i++)
+            for (int i = 0; i < Emitters.Count; i++)
             {
                 Emitters[i].Dispose();
             }
