@@ -15,7 +15,7 @@ public sealed class ColorInterpolator : Interpolator<Vector3>
         float s = EndValue.Y - StartValue.Y * amount + StartValue.Y;
         float l = EndValue.Z - StartValue.Z * amount + StartValue.Z;
 
-        particle->Color[0] = ColorUtilities.NormalizeHue(h);
+        particle->Color[0] = h;
         particle->Color[1] = s;
         particle->Color[2] = l;
     }

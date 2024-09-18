@@ -37,7 +37,7 @@ public class VelocityColorModifier : Modifier
                 float s = deltaColor.Y * t + StationaryColor.Y;
                 float l = deltaColor.Z * t + StationaryColor.Z;
 
-                particle->Color[0] = ColorUtilities.NormalizeHue(h);
+                particle->Color[0] = h;
                 particle->Color[1] = s;
                 particle->Color[2] = l;
             }

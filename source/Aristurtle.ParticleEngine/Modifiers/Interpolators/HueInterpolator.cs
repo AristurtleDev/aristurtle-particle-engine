@@ -11,6 +11,6 @@ public class HueInterpolator : Interpolator<float>
     public override unsafe void Update(float amount, Particle* particle)
     {
         float h = EndValue - StartValue * amount + StartValue;
-        particle->Color[0] = ColorUtilities.NormalizeHue(h);
+        particle->Color[0] = h;
     }
 }

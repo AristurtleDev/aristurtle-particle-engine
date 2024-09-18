@@ -8,89 +8,48 @@ namespace Aristurtle.ParticleEngine;
 
 public static class ColorUtilities
 {
-    public static void RgbToHsl(int r, int g, int b, out float h, out float s, out float l)
+    public static unsafe void HslToRgb(Vector3* value)
     {
-        float rf = r / 255.0f;
-        float gf = g / 255.0f;
-        float bf = b / 255.0f;
-        RgbToHsl(rf, gf, bf, out h, out s, out l);
+        double C = (1 - Math.Abs(2 * value->Z - 1)) * value->Y;
+        double X = C * (1 - Math.Abs((value->X / 60) % 2 - 1));
+        double m = value->Z - C / 2;
+
+        double rPrime, gPrime, bPrime;
+
+        if (value->X < 60) (rPrime, gPrime, bPrime) = (C, X, 0);
+        else if (value->X < 120) (rPrime, gPrime, bPrime) = (X, C, 0);
+        else if (value->X < 180) (rPrime, gPrime, bPrime) = (0, C, X);
+        else if (value->X < 240) (rPrime, gPrime, bPrime) = (0, X, C);
+        else if (value->X < 300) (rPrime, gPrime, bPrime) = (X, 0, C);
+        else (rPrime, gPrime, bPrime) = (C, 0, X);
+
+        value->X = (int)Math.Round((rPrime + m) * 255);
+        value->Y = (int)Math.Round((gPrime + m) * 255);
+        value->Z = (int)Math.Round((bPrime + m) * 255);
     }
 
-    public static void RgbToHsl(Vector3 rgb, out float h, out float s, out float l) => RgbToHsl(rgb.X, rgb.Y, rgb.Z, out h, out s, out l);
-
-    public static void RgbToHsl(float r, float g, float b, out float h, out float s, out float l)
+    public static unsafe void RgbToHsl(Vector3* value)
     {
-        float max = Math.Max(r, Math.Max(g, b));
-        float min = Math.Min(r, Math.Min(g, b));
-        float delta = max - min;
+        if (value->X > 1.0f) value->X /= 255.0f;
+        if (value->Y > 1.0f) value->Y /= 255.0f;
+        if (value->Z > 1.0f) value->Z /= 255.0f;
 
-        h = delta == 0 ? 0 :
-            max == r ? 60 * ((g - b) / delta % 6) :
-            max == g ? 60 * ((b - r) / delta + 2) :
-                       60 * ((r - g) / delta + 4);
+        double max = Math.Max(value->X, Math.Max(value->Y, value->Z));
+        double min = Math.Min(value->X, Math.Min(value->Y, value->Z));
+        double delta = max - min;
 
-        h = NormalizeHue(h);
-        l = (max + min) * 0.5f;
-        s = delta == 0 ? 0 : delta / (1 - Math.Abs(2 * l - 1));
-    }
+        if (delta == 0) value->X = 0;
+        else if (max == value->X) value->X = (float)(((value->Y - value->Z) / delta) % 6);
+        else if (max == value->Y) value->X = (float)((value->Z - value->X) / delta + 2);
+        else value->X = (float)((value->X - value->Y) / delta + 4);
 
-    public static void HslToRgb(Vector3 hsl, out int r, out int g, out int b) => HslToRgb(hsl.X, hsl.Y, hsl.Z, out r, out g, out b);
+        value->X *= 60;
 
-    public static void HslToRgb(float h, float s, float l, out int r, out int g, out int b)
-    {
-        double chroma = l < 0.5 ? l * (1.0 + s) : l + s - l * s;
-        double lightness = 2.0 * l - chroma;
+        if (value->X < 0) value->X += 360.0f;
 
-        double normalizedHue = h / 360.0;
+        value->Z = (float)((max + min) / 2);
 
-        double redComponent = ComputeRGBComponent(lightness, chroma, NormalizeValue(normalizedHue + 1.0 / 3.0));
-        double greenComponent = ComputeRGBComponent(lightness, chroma, normalizedHue);
-        double blueComponent = ComputeRGBComponent(lightness, chroma, NormalizeValue(normalizedHue - 1.0 / 3.0));
-
-        r = (byte)(redComponent * 255.0);
-        g = (byte)(greenComponent * 255.0);
-        b = (byte)(blueComponent * 255.0);
-    }
-
-    public static float NormalizeHue(float hue)
-    {
-        if (hue < 0)
-        {
-            return hue + 360 * ((int)hue / 360 + 1);
-        }
-
-        return hue % 360;
-    }
-
-    private static double NormalizeValue(double value)
-    {
-        if (value < 0.0)
-        {
-            return value + 1.0;
-        }
-
-        if (value > 1.0)
-        {
-            return value - 1.0;
-        }
-
-        return value;
-    }
-
-    private static double ComputeRGBComponent(double lightness, double chroma, double hueComponent)
-    {
-        if (hueComponent < 1.0 / 6.0)
-        {
-            return lightness + (chroma - lightness) * 6.0 * hueComponent;
-        }
-        if (hueComponent < 0.5)
-        {
-            return chroma;
-        }
-        if (hueComponent < 2.0 / 3.0)
-        {
-            return lightness + (chroma - lightness) * 6.0 * (2.0 / 3.0 - hueComponent);
-        }
-        return lightness;
+        if (delta == 0) value->Y = 0;
+        else value->Y = (float)(delta / (1 - Math.Abs(2 * value->Z - 1)));
     }
 }
