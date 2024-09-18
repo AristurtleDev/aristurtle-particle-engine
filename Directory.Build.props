@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+    <!-- Standardize compilation settings -->
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <NeutralLanguage>en</NeutralLanguage>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <Version>6.0.0</Version>
+        <Copyright>Released under The Unlicense.  For more information please refer to https://unlicense.org.</Copyright>
+        <Authors>Original Author: Matt Davey; Current Maintainers: Christopher Whitley and contributors.</Authors>
+    </PropertyGroup>
+
+    <!-- Set the root directory as the solution directory -->
+    <PropertyGroup>
+        <SolutionDirectory>$(MSBuildThisFileDirectory)</SolutionDirectory>
+    </PropertyGroup>
+
+    <!-- Standardize build output locations -->
+    <PropertyGroup>
+        <BaseArtifactsPath>$(SolutionDirectory).artifacts/</BaseArtifactsPath>
+        <BaseArtifactsPathSuffix>$(ProjectCategory)/$(MSBuildProjectName)</BaseArtifactsPathSuffix>
+        <BaseIntermediateOutputPath>$(BaseArtifactsPath)obj/$(BaseArtifactsPathSuffix)</BaseIntermediateOutputPath>
+        <BaseOutputPath>$(BaseArtifactsPath)bin/$(BaseArtifactsPathSuffix)</BaseOutputPath>
+        <PackageOutputPath>$(BaseArtifactsPath)pkg/$(BaseArtifactsPathSuffix)/$(Configuration)/</PackageOutputPath>
+    </PropertyGroup>
+
+
+    <!-- Setup Code Analysis using the .editorconfig file -->
+    <PropertyGroup>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+        <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <WarningsAsErrors>nullable</WarningsAsErrors>
+    </PropertyGroup>
+</Project>

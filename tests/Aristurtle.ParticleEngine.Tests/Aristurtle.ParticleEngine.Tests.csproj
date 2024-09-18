@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <!-- 
+        All project use a standard compilation configuration
+        which can be found in the Directory.Build.props file
+        in the root of this repository.  Only overwrite those
+        properties here if needed
+    -->
+</Project>
