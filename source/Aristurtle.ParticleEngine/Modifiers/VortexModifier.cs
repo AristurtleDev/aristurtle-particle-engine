@@ -25,7 +25,7 @@ public unsafe class VortexModifier : Modifier
             var distance2 = (distx * distx) + (disty * disty);
             var distance = (float)Math.Sqrt(distance2);
 
-            var m = (10000f * Mass * particle->Mass) / distance2;
+            var m = (GRAVITY * Mass * particle->Mass) / distance2;
             m = Math.Max(Math.Min(m, MaxSpeed), -MaxSpeed) * elapsedSeconds;
 
             distx = (distx / distance) * m;
