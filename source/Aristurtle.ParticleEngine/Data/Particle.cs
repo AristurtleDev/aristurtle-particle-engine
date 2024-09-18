@@ -7,7 +7,10 @@ using System.Runtime.InteropServices;
 namespace Aristurtle.ParticleEngine.Data;
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
+#pragma warning disable CA1815 // Override equals and operator equals on value types
 public unsafe struct Particle
+#pragma warning restore CA1815 // Override equals and operator equals on value types
+
 {
     public float Inception;
     public float Age;
