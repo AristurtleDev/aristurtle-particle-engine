@@ -3,7 +3,6 @@
 // License information can also be found at https://unlicense.org/.
 
 using Aristurtle.ParticleEngine.Data;
-using Aristurtle.ParticleEngine.Maths;
 
 namespace Aristurtle.ParticleEngine.Modifiers.Interpolators;
 

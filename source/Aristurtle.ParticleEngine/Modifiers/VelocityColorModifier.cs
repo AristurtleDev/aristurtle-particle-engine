@@ -4,7 +4,6 @@
 
 using System.Numerics;
 using Aristurtle.ParticleEngine.Data;
-using Aristurtle.ParticleEngine.Maths;
 
 namespace Aristurtle.ParticleEngine.Modifiers;
 

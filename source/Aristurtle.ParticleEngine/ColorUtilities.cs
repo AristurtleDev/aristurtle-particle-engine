@@ -4,7 +4,7 @@
 
 using System.Numerics;
 
-namespace Aristurtle.ParticleEngine.Maths;
+namespace Aristurtle.ParticleEngine;
 
 public static class ColorUtilities
 {
@@ -38,7 +38,7 @@ public static class ColorUtilities
 
     public static void HslToRgb(float h, float s, float l, out int r, out int g, out int b)
     {
-        double chroma = (l < 0.5) ? (l * (1.0 + s)) : (l + s - l * s);
+        double chroma = l < 0.5 ? l * (1.0 + s) : l + s - l * s;
         double lightness = 2.0 * l - chroma;
 
         double normalizedHue = h / 360.0;
