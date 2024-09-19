@@ -53,7 +53,7 @@ public sealed unsafe class ParticleEmitter : IDisposable
     public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
 
     [JsonPropertyName("modifiers")]
-    public List<Modifier> Modifiers { get; }
+    public List<Modifier> Modifiers;
 
     [JsonPropertyName("profile")]
     public Profile Profile;
