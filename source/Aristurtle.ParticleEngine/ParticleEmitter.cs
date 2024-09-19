@@ -126,10 +126,6 @@ public sealed unsafe class ParticleEmitter : IDisposable
                 Trigger(position, LayerDepth);
                 _nextAutoTrigger = AutoTriggerFrequency;
             }
-            else
-            {
-                Debug.WriteLine(_nextAutoTrigger);
-            }
         }
 
         if (Buffer.Count == 0)
