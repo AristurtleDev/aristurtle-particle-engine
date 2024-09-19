@@ -16,12 +16,30 @@ public static class ColorUtilities
 
         double rPrime, gPrime, bPrime;
 
-        if (value->X < 60) (rPrime, gPrime, bPrime) = (C, X, 0);
-        else if (value->X < 120) (rPrime, gPrime, bPrime) = (X, C, 0);
-        else if (value->X < 180) (rPrime, gPrime, bPrime) = (0, C, X);
-        else if (value->X < 240) (rPrime, gPrime, bPrime) = (0, X, C);
-        else if (value->X < 300) (rPrime, gPrime, bPrime) = (X, 0, C);
-        else (rPrime, gPrime, bPrime) = (C, 0, X);
+        if (value->X < 60)
+        {
+            (rPrime, gPrime, bPrime) = (C, X, 0);
+        }
+        else if (value->X < 120)
+        {
+            (rPrime, gPrime, bPrime) = (X, C, 0);
+        }
+        else if (value->X < 180)
+        {
+            (rPrime, gPrime, bPrime) = (0, C, X);
+        }
+        else if (value->X < 240)
+        {
+            (rPrime, gPrime, bPrime) = (0, X, C);
+        }
+        else if (value->X < 300)
+        {
+            (rPrime, gPrime, bPrime) = (X, 0, C);
+        }
+        else
+        {
+            (rPrime, gPrime, bPrime) = (C, 0, X);
+        }
 
         value->X = (int)Math.Round((rPrime + m) * 255);
         value->Y = (int)Math.Round((gPrime + m) * 255);
@@ -30,26 +48,58 @@ public static class ColorUtilities
 
     public static unsafe void RgbToHsl(Vector3* value)
     {
-        if (value->X > 1.0f) value->X /= 255.0f;
-        if (value->Y > 1.0f) value->Y /= 255.0f;
-        if (value->Z > 1.0f) value->Z /= 255.0f;
+        if (value->X > 1.0f)
+        {
+            value->X /= 255.0f;
+        }
+
+        if (value->Y > 1.0f)
+        {
+            value->Y /= 255.0f;
+        }
+
+        if (value->Z > 1.0f)
+        {
+            value->Z /= 255.0f;
+        }
 
         double max = Math.Max(value->X, Math.Max(value->Y, value->Z));
         double min = Math.Min(value->X, Math.Min(value->Y, value->Z));
         double delta = max - min;
 
-        if (delta == 0) value->X = 0;
-        else if (max == value->X) value->X = (float)(((value->Y - value->Z) / delta) % 6);
-        else if (max == value->Y) value->X = (float)((value->Z - value->X) / delta + 2);
-        else value->X = (float)((value->X - value->Y) / delta + 4);
+        if (delta == 0)
+        {
+            value->X = 0;
+        }
+        else if (max == value->X)
+        {
+            value->X = (float)(((value->Y - value->Z) / delta) % 6);
+        }
+        else if (max == value->Y)
+        {
+            value->X = (float)((value->Z - value->X) / delta + 2);
+        }
+        else
+        {
+            value->X = (float)((value->X - value->Y) / delta + 4);
+        }
 
         value->X *= 60;
 
-        if (value->X < 0) value->X += 360.0f;
+        if (value->X < 0)
+        {
+            value->X += 360.0f;
+        }
 
         value->Z = (float)((max + min) / 2);
 
-        if (delta == 0) value->Y = 0;
-        else value->Y = (float)(delta / (1 - Math.Abs(2 * value->Z - 1)));
+        if (delta == 0)
+        {
+            value->Y = 0;
+        }
+        else
+        {
+            value->Y = (float)(delta / (1 - Math.Abs(2 * value->Z - 1)));
+        }
     }
 }
