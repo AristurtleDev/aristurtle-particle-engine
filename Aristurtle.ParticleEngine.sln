@@ -5,19 +5,22 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{81A5AEA8-5F92-48A6-9801-AB480364C132}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aristurtle.ParticleEngine", "source\Aristurtle.ParticleEngine\Aristurtle.ParticleEngine.csproj", "{AE372E79-4950-4E7E-8C23-98DB0381907A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aristurtle.ParticleEngine", "source\Aristurtle.ParticleEngine\Aristurtle.ParticleEngine.csproj", "{AE372E79-4950-4E7E-8C23-98DB0381907A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5BC54C91-FE8F-4A4E-8BEB-AB8CDB60D819}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aristurtle.ParticleEngine.Tests", "tests\Aristurtle.ParticleEngine.Tests\Aristurtle.ParticleEngine.Tests.csproj", "{3727D2BA-1236-4F99-B52D-6CB90735E401}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aristurtle.ParticleEngine.Tests", "tests\Aristurtle.ParticleEngine.Tests\Aristurtle.ParticleEngine.Tests.csproj", "{3727D2BA-1236-4F99-B52D-6CB90735E401}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{841D7515-CA6D-47E4-BDB0-B3D127341A70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MonoGame", "MonoGame", "{CF570067-7A69-4D00-B233-197DDA8B4413}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aristurtle.ParticleEngine.MonoGame.Sample", "samples\MonoGame\Aristurtle.ParticleEngine.MonoGame.Sample.csproj", "{E796A812-C077-4FE2-A5C6-35ED6307E6DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AE372E79-4950-4E7E-8C23-98DB0381907A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -28,9 +31,21 @@ Global
 		{3727D2BA-1236-4F99-B52D-6CB90735E401}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3727D2BA-1236-4F99-B52D-6CB90735E401}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3727D2BA-1236-4F99-B52D-6CB90735E401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E796A812-C077-4FE2-A5C6-35ED6307E6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E796A812-C077-4FE2-A5C6-35ED6307E6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E796A812-C077-4FE2-A5C6-35ED6307E6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E796A812-C077-4FE2-A5C6-35ED6307E6DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AE372E79-4950-4E7E-8C23-98DB0381907A} = {81A5AEA8-5F92-48A6-9801-AB480364C132}
 		{3727D2BA-1236-4F99-B52D-6CB90735E401} = {5BC54C91-FE8F-4A4E-8BEB-AB8CDB60D819}
+		{CF570067-7A69-4D00-B233-197DDA8B4413} = {841D7515-CA6D-47E4-BDB0-B3D127341A70}
+		{E796A812-C077-4FE2-A5C6-35ED6307E6DF} = {CF570067-7A69-4D00-B233-197DDA8B4413}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43A8AC31-AA35-48F9-BB60-AA803A128D49}
 	EndGlobalSection
 EndGlobal
