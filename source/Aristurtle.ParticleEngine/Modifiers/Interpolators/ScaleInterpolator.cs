@@ -10,6 +10,6 @@ public class ScaleInterpolator : Interpolator<float>
 {
     public override unsafe void Update(float amount, Particle* particle)
     {
-        particle->Scale = (EndValue - StartValue) * amount + StartValue;
+        particle->Scale = StartValue + (EndValue - StartValue) * amount;
     }
 }

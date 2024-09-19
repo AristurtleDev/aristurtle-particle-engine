@@ -10,7 +10,7 @@ public class HueInterpolator : Interpolator<float>
 {
     public override unsafe void Update(float amount, Particle* particle)
     {
-        float h = EndValue - StartValue * amount + StartValue;
+        float h = StartValue + (EndValue - StartValue) * amount;
         particle->Color[0] = h;
     }
 }
