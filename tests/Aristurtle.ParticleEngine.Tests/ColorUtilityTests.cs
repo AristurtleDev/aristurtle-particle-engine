@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// Released under The Unlicense.
+// See LICENSE file in the project root for full license information.
+// License information can also be found at https://unlicense.org/.
+
 using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic;
-using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 
 namespace Aristurtle.ParticleEngine.Tests;
-
 
 public sealed class ColorUtilityTests
 {
