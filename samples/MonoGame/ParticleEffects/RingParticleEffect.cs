@@ -2,12 +2,7 @@
 // See LICENSE file in the project root for full license information.
 // License information can also be found at https://unlicense.org/.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Aristurtle.ParticleEngine.Data;
 using Aristurtle.ParticleEngine.Modifiers;
 using Aristurtle.ParticleEngine.Modifiers.Containers;
