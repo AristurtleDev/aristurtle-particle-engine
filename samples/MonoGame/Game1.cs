@@ -2,12 +2,7 @@
 // See LICENSE file in the project root for full license information.
 // License information can also be found at https://unlicense.org/.
 
-using System;
-using Aristurtle.ParticleEngine.Data;
-using Aristurtle.ParticleEngine.Modifiers;
-using Aristurtle.ParticleEngine.Modifiers.Interpolators;
 using Aristurtle.ParticleEngine.MonoGame.Sample.ParticleEffects;
-using Aristurtle.ParticleEngine.Profiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,11 +14,7 @@ namespace Aristurtle.ParticleEngine.MonoGame.Sample
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private ParticleRenderer _particleRenderer;
-        private ParticleEffect _ringEffect;
-        private ParticleEffect _loadTestEffect;
         private SpriteFont _font;
-        private SmokeParticleEffect _smoke;
-        private SparkParticleEffect _spark;
 
         private ParticleEffect[] _particleEffects;
         private ParticleEffect _currentParticleEffect;
@@ -31,7 +22,6 @@ namespace Aristurtle.ParticleEngine.MonoGame.Sample
         private MouseState _currentMouse;
         private KeyboardState _previousKeyboard;
         private KeyboardState _currentKeyboard;
-
 
         public Game1()
         {
@@ -72,8 +62,6 @@ namespace Aristurtle.ParticleEngine.MonoGame.Sample
             _particleEffects[3] = new LoadTestParticleEffect();
             _currentParticleEffect = _particleEffects[0];
         }
-
-
 
         protected override void Update(GameTime gameTime)
         {
@@ -128,7 +116,7 @@ namespace Aristurtle.ParticleEngine.MonoGame.Sample
             GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-            for(int i = 0; i < _particleEffects.Length; i++)
+            for (int i = 0; i < _particleEffects.Length; i++)
             {
                 if (_particleEffects[i] is ParticleEffect effect)
                 {
