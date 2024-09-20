@@ -3,7 +3,6 @@
 // License information can also be found at https://unlicense.org/.
 
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Drawing;
 using System.Numerics;
 using System.Text.Json.Serialization;
@@ -189,6 +188,9 @@ public sealed unsafe class ParticleEmitter : IDisposable
 
             particle->Position[0] += position.X;
             particle->Position[1] += position.Y;
+
+            particle->TriggerPos[0] = position.X;
+            particle->TriggerPos[1] = position.Y;
 
             float speed = Parameters.Speed.Value;
 
