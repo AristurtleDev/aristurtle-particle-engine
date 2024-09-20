@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <!-- Set the project category used by the root Directory.Build.props -->
+  <PropertyGroup>
+    <ProjectCategory>test</ProjectCategory>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- All test projects use the same NuGet references -->
+  <ItemGroup>
+    <PackageReference Include="xunit"
+                      Version="2.6.2"
+                      IsImplicitlyDefined="true" />
+
+    <PackageReference Include="Microsoft.NET.Test.Sdk"
+                      Version="17.6.0"
+                      IsImplicitlyDefined="true" />
+
+    <PackageReference Include="xunit.runner.visualstudio"
+                      Version="2.5.6"
+                      IsImplicitlyDefined="true"
+                      IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"
+                      PrivateAssets="all" />
+
+    <PackageReference Include="coverlet.collector"
+                      Version="6.0.0"
+                      IsImplicitlyDefined="true"
+                      IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- Implicitly enable "Xunit" namespace globally if implicit using is defined -->
+  <ItemGroup>
+    <Using Include="Xunit"/>
+  </ItemGroup>
+
+  <PropertyGroup>
+      <!-- Identifiers should not contain underscores -->
+      <NoWarn>CA1707</NoWarn>
+  </PropertyGroup>
+  
+  <!-- Import the root prop last -->
+  <Import Project="$(MSBuildThisFileDirectory)..\Directory.Build.props" />
+
+
+</Project>
