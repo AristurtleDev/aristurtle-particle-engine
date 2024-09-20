@@ -8,42 +8,48 @@ namespace Aristurtle.ParticleEngine;
 
 public static class ColorUtilities
 {
-    public static void HslToRgb(float h, float s, float l, out int r, out int g, out int b)
+    public static unsafe void HslToRgb(float h, float s, float l, out int r, out int g, out int b)
     {
-        double C = (1 - Math.Abs(2 * l - 1)) * s;
-        double X = C * (1 - Math.Abs((h / 60) % 2 - 1));
-        double m = l - C / 2;
+        Vector3 value = new Vector3(h, s, l);
+        HslToRgb(&value);
+        r = (int)value.X;
+        g = (int)value.Y;
+        b = (int)value.Z;
 
-        double rPrime, gPrime, bPrime;
+        //double C = (1 - Math.Abs(2 * l - 1)) * s;
+        //double X = C * (1 - Math.Abs((h / 60) % 2 - 1));
+        //double m = l - C / 2;
 
-        if (h < 60)
-        {
-            (rPrime, gPrime, bPrime) = (C, X, 0);
-        }
-        else if (h < 120)
-        {
-            (rPrime, gPrime, bPrime) = (X, C, 0);
-        }
-        else if (h < 180)
-        {
-            (rPrime, gPrime, bPrime) = (0, C, X);
-        }
-        else if (h < 240)
-        {
-            (rPrime, gPrime, bPrime) = (0, X, C);
-        }
-        else if (h < 300)
-        {
-            (rPrime, gPrime, bPrime) = (X, 0, C);
-        }
-        else
-        {
-            (rPrime, gPrime, bPrime) = (C, 0, X);
-        }
+        //double rPrime, gPrime, bPrime;
 
-        r = (int)Math.Round((rPrime + m) * 255);
-        g = (int)Math.Round((gPrime + m) * 255);
-        b = (int)Math.Round((bPrime + m) * 255);
+        //if (h < 60)
+        //{
+        //    (rPrime, gPrime, bPrime) = (C, X, 0);
+        //}
+        //else if (h < 120)
+        //{
+        //    (rPrime, gPrime, bPrime) = (X, C, 0);
+        //}
+        //else if (h < 180)
+        //{
+        //    (rPrime, gPrime, bPrime) = (0, C, X);
+        //}
+        //else if (h < 240)
+        //{
+        //    (rPrime, gPrime, bPrime) = (0, X, C);
+        //}
+        //else if (h < 300)
+        //{
+        //    (rPrime, gPrime, bPrime) = (X, 0, C);
+        //}
+        //else
+        //{
+        //    (rPrime, gPrime, bPrime) = (C, 0, X);
+        //}
+
+        //r = (int)Math.Round((rPrime + m) * 255);
+        //g = (int)Math.Round((gPrime + m) * 255);
+        //b = (int)Math.Round((bPrime + m) * 255);
     }
 
     public static unsafe void HslToRgb(Vector3* value)
@@ -84,61 +90,67 @@ public static class ColorUtilities
         value->Z = (int)Math.Round((bPrime + m) * 255);
     }
 
-    public static void RgbToHsl(float r, float g, float b, out float h, out float s, out float l)
+    public static unsafe void RgbToHsl(float r, float g, float b, out float h, out float s, out float l)
     {
-        if (r > 1.0f)
-        {
-            r /= 255.0f;
-        }
+        Vector3 value = new Vector3(r, g, b);
+        RgbToHsl(&value);
+        h = value.X;
+        s = value.Y;
+        l = value.Z;
 
-        if (g > 1.0f)
-        {
-            g /= 255.0f;
-        }
+        //if (r > 1.0f)
+        //{
+        //    r /= 255.0f;
+        //}
 
-        if (b > 1.0f)
-        {
-            b /= 255.0f;
-        }
+        //if (g > 1.0f)
+        //{
+        //    g /= 255.0f;
+        //}
 
-        double max = Math.Max(r, Math.Max(g, b));
-        double min = Math.Min(r, Math.Min(g, b));
-        double delta = max - min;
+        //if (b > 1.0f)
+        //{
+        //    b /= 255.0f;
+        //}
 
-        if (delta == 0)
-        {
-            h = 0;
-        }
-        else if (max == r)
-        {
-            h = (float)(((g - b) / delta) % 6);
-        }
-        else if (max == g)
-        {
-            h = (float)((b - r) / delta + 2);
-        }
-        else
-        {
-            h = (float)((r - g) / delta + 4);
-        }
+        //double max = Math.Max(r, Math.Max(g, b));
+        //double min = Math.Min(r, Math.Min(g, b));
+        //double delta = max - min;
 
-        h *= 60;
+        //if (delta == 0)
+        //{
+        //    h = 0;
+        //}
+        //else if (max == r)
+        //{
+        //    h = (float)(((g - b) / delta) % 6);
+        //}
+        //else if (max == g)
+        //{
+        //    h = (float)((b - r) / delta + 2);
+        //}
+        //else
+        //{
+        //    h = (float)((r - g) / delta + 4);
+        //}
 
-        if (h < 0)
-        {
-            h += 360.0f;
-        }
+        //h *= 60;
 
-        l = (float)((max + min) / 2);
+        //if (h < 0)
+        //{
+        //    h += 360.0f;
+        //}
 
-        if (delta == 0)
-        {
-            s = 0;
-        }
-        else
-        {
-            s = (float)(delta / (1 - Math.Abs(2 * l - 1)));
-        }
+        //l = (float)((max + min) / 2);
+
+        //if (delta == 0)
+        //{
+        //    s = 0;
+        //}
+        //else
+        //{
+        //    s = (float)(delta / (1 - Math.Abs(2 * l - 1)));
+        //}
     }
 
     public static unsafe void RgbToHsl(Vector3* value)

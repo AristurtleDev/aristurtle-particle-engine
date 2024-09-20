@@ -35,6 +35,7 @@ public sealed class ColorUtilityTests
         Vector3 expected = new Vector3(h, s, l);
         Vector3 actual = new Vector3(r, g, b);
         ColorUtilities.RgbToHsl(&actual);
+        Assert.Equal(expected, actual);
     }
 
     [Theory]
@@ -44,5 +45,6 @@ public sealed class ColorUtilityTests
         Vector3 expected = new Vector3(r, g, b);
         Vector3 actual = new Vector3(h, s, l);
         ColorUtilities.HslToRgb(&actual);
+        Assert.Equal(expected, actual);
     }
 }
