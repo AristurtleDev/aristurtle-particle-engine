@@ -22,7 +22,7 @@ public sealed class SparkParticleEffect : ParticleEffect
     {
         Emitters = new List<ParticleEmitter>()
         {
-            new ParticleEmitter(100000)
+            new ParticleEmitter(2000)
             {
                 AutoTrigger = false,
                 LifeSpan = 2.0f,
@@ -30,7 +30,7 @@ public sealed class SparkParticleEffect : ParticleEffect
                 Parameters = new ParticleReleaseParameters()
                 {
                     Opacity = new ParticleFloatParameter(1.0f),
-                    Quantity = new ParticleInt32Parameter(1000),
+                    Quantity = new ParticleInt32Parameter(10),
                     Speed = new ParticleFloatParameter(0.0f, 100.0f),
                     Scale = new ParticleFloatParameter(1.0f),
                     Mass = new ParticleFloatParameter(8.0f, 12.0f),
@@ -38,7 +38,7 @@ public sealed class SparkParticleEffect : ParticleEffect
                 },
                 ReclaimFrequency = 5.0f,
                 TextureName = "Particle",
-                Modifiers = new List<Modifiers.Modifier>()
+                Modifiers = new List<Modifier>()
                 {
                     new LinearGravityModifier()
                     {
@@ -46,13 +46,12 @@ public sealed class SparkParticleEffect : ParticleEffect
                         Strength = 30.0f,
                         Frequency = 15.0f
                     },
-                    new ContainerModifier()
+                    new RectangleContainerModifier()
                     {
                         Frequency = 15.0f,
-                        Width = 1280 * 2,
-                        Height = 720 * 2,
+                        Width = 1280,
+                        Height = 720,
                         RestitutionCoefficient = 0.75f,
-                        Position = new Vector2(1280, 720) * 0.5f
                     },
                     new OpacityFastFadeModifier()
                     {

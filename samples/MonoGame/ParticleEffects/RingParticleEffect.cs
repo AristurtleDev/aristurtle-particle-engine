@@ -25,19 +25,19 @@ public sealed class RingParticleEffect : ParticleEffect
             {
                 AutoTrigger = false,
                 LifeSpan = 3.0f,
-                Profile = Profile.Spray(Vector2.UnitY, 0.5f),
+                Profile = Profile.Spray(-Vector2.UnitY, 0.5f),
                 Parameters = new ParticleReleaseParameters()
                 {
                     Opacity = new ParticleFloatParameter(1.0f),
                     Quantity = new ParticleInt32Parameter(1),
                     Speed = new ParticleFloatParameter(300.0f, 700.0f),
-                    Scale = new ParticleFloatParameter(1.0f),
+                    Scale = new ParticleFloatParameter(0.5f),
                     Mass = new ParticleFloatParameter(4.0f, 12.0f),
                     Color = new ParticleColorParameter(new Vector3(210.0f, 0.5f, 0.6f), new Vector3(230.0f, 0.7f, 0.8f))
                 },
                 ReclaimFrequency = 5.0f,
                 TextureName = "Ring001",
-                Modifiers = new List<Modifiers.Modifier>()
+                Modifiers = new List<Modifier>()
                 {
                     new LinearGravityModifier()
                     {
@@ -49,13 +49,12 @@ public sealed class RingParticleEffect : ParticleEffect
                     {
                         Frequency = 10.0f
                     },
-                    new ContainerModifier()
+                    new RectangleContainerModifier()
                     {
                         Frequency = 15.0f,
-                        Width = 1280 * 2,
-                        Height = 720 * 2,
+                        Width = 1280,
+                        Height = 720,
                         RestitutionCoefficient = 0.75f,
-                        Position = new Vector2(1280, 720) * 0.5f
                     }
                 }
             }
