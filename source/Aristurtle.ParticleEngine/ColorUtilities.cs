@@ -15,41 +15,6 @@ public static class ColorUtilities
         r = (int)value.X;
         g = (int)value.Y;
         b = (int)value.Z;
-
-        //double C = (1 - Math.Abs(2 * l - 1)) * s;
-        //double X = C * (1 - Math.Abs((h / 60) % 2 - 1));
-        //double m = l - C / 2;
-
-        //double rPrime, gPrime, bPrime;
-
-        //if (h < 60)
-        //{
-        //    (rPrime, gPrime, bPrime) = (C, X, 0);
-        //}
-        //else if (h < 120)
-        //{
-        //    (rPrime, gPrime, bPrime) = (X, C, 0);
-        //}
-        //else if (h < 180)
-        //{
-        //    (rPrime, gPrime, bPrime) = (0, C, X);
-        //}
-        //else if (h < 240)
-        //{
-        //    (rPrime, gPrime, bPrime) = (0, X, C);
-        //}
-        //else if (h < 300)
-        //{
-        //    (rPrime, gPrime, bPrime) = (X, 0, C);
-        //}
-        //else
-        //{
-        //    (rPrime, gPrime, bPrime) = (C, 0, X);
-        //}
-
-        //r = (int)Math.Round((rPrime + m) * 255);
-        //g = (int)Math.Round((gPrime + m) * 255);
-        //b = (int)Math.Round((bPrime + m) * 255);
     }
 
     public static unsafe void HslToRgb(Vector3* value)
@@ -97,60 +62,6 @@ public static class ColorUtilities
         h = value.X;
         s = value.Y;
         l = value.Z;
-
-        //if (r > 1.0f)
-        //{
-        //    r /= 255.0f;
-        //}
-
-        //if (g > 1.0f)
-        //{
-        //    g /= 255.0f;
-        //}
-
-        //if (b > 1.0f)
-        //{
-        //    b /= 255.0f;
-        //}
-
-        //double max = Math.Max(r, Math.Max(g, b));
-        //double min = Math.Min(r, Math.Min(g, b));
-        //double delta = max - min;
-
-        //if (delta == 0)
-        //{
-        //    h = 0;
-        //}
-        //else if (max == r)
-        //{
-        //    h = (float)(((g - b) / delta) % 6);
-        //}
-        //else if (max == g)
-        //{
-        //    h = (float)((b - r) / delta + 2);
-        //}
-        //else
-        //{
-        //    h = (float)((r - g) / delta + 4);
-        //}
-
-        //h *= 60;
-
-        //if (h < 0)
-        //{
-        //    h += 360.0f;
-        //}
-
-        //l = (float)((max + min) / 2);
-
-        //if (delta == 0)
-        //{
-        //    s = 0;
-        //}
-        //else
-        //{
-        //    s = (float)(delta / (1 - Math.Abs(2 * l - 1)));
-        //}
     }
 
     public static unsafe void RgbToHsl(Vector3* value)
