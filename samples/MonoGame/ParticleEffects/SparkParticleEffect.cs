@@ -31,7 +31,7 @@ public sealed class SparkParticleEffect : ParticleEffect
                     Color = new ParticleColorParameter(new Vector3(50.0f, 0.8f, 0.5f))
                 },
                 ReclaimFrequency = 5.0f,
-                TextureName = "Particle",
+                TextureKey = "Particle",
                 Modifiers = new List<Modifier>()
                 {
                     new LinearGravityModifier()

@@ -32,7 +32,7 @@ public sealed unsafe class ParticleEmitter : IDisposable
     public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
     public List<Modifier> Modifiers;
     public Profile Profile;
-    public string TextureName;
+    public string TextureKey;
     public Rectangle? SourceRectangle { get; set; }
     public ParticleRenderingOrder RenderingOrder { get; set; }
 
@@ -48,7 +48,7 @@ public sealed unsafe class ParticleEmitter : IDisposable
     {
         LifeSpan = 1.0f;
         Name = nameof(ParticleEmitter);
-        TextureName = string.Empty;
+        TextureKey = string.Empty;
         SourceRectangle = null;
         Buffer = new ParticleBuffer(initialCapacity);
         Profile = Profile.Point();

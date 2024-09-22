@@ -32,7 +32,7 @@ public sealed class SmokeParticleEffect : ParticleEffect
                     Mass = new ParticleFloatParameter(8.0f, 12.0f)
                 },
                 ReclaimFrequency = 5.0f,
-                TextureName = "Cloud001",
+                TextureKey = "Cloud001",
                 Modifiers = new List<Modifier>()
                 {
                     new DragModifier()

@@ -31,7 +31,7 @@ public sealed class LoadTestParticleEffect : ParticleEffect
                     Opacity = new ParticleFloatParameter(0.4f),
                 },
                 ReclaimFrequency = 5.0f,
-                TextureName = "Pixel",
+                TextureKey = "Pixel",
                 ModifierExecutionStrategy = ModifierExecutionStrategy.Parallel,
                 Modifiers = new List<Modifier>()
                 {

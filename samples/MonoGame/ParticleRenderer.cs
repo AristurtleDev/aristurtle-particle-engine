@@ -43,14 +43,14 @@ public sealed class ParticleRenderer : IDisposable
     {
         ArgumentNullException.ThrowIfNull(spriteBatch);
 
-        if (string.IsNullOrEmpty(emitter.TextureName))
+        if (string.IsNullOrEmpty(emitter.TextureKey))
         {
             return;
         }
 
-        if (!Textures.TryGetValue(emitter.TextureName, out Texture2D texture))
+        if (!Textures.TryGetValue(emitter.TextureKey, out Texture2D texture))
         {
-            throw new InvalidOperationException($"{nameof(ParticleRenderer)} does not contain a texture named '{emitter.TextureName}'.  Did you forget to add it?");
+            throw new InvalidOperationException($"{nameof(ParticleRenderer)} does not contain a texture named '{emitter.TextureKey}'.  Did you forget to add it?");
         }
 
         Rectangle sourceRect;

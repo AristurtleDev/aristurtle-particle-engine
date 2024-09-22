@@ -31,7 +31,7 @@ public sealed class RingParticleEffect : ParticleEffect
                     Color = new ParticleColorParameter(new Vector3(210.0f, 0.5f, 0.6f), new Vector3(230.0f, 0.7f, 0.8f))
                 },
                 ReclaimFrequency = 5.0f,
-                TextureName = "Ring001",
+                TextureKey = "Ring001",
                 Modifiers = new List<Modifier>()
                 {
                     new LinearGravityModifier()
