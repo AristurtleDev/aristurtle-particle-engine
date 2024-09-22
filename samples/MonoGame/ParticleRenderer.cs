@@ -63,6 +63,22 @@ public sealed class ParticleRenderer : IDisposable
         Particle* particle = (Particle*)emitter.Buffer.NativePointer;
         int count = emitter.ActiveParticles;
 
+        IntPtr buffer = Marshal.AllocHGlobal(emitter.Buffer.ActiveSizeInBytes);
+
+
+        try
+        {
+            if(emitter.RenderingOrder == ParticleRenderingOrder.FrontToBack)
+            {
+                emitter.Buffer.CopyToReverse(buffer);
+            }
+            else
+            {
+                emitter.Buffer.CopyTo(buffer);
+            }
+
+            Particle* particle = (Particle*)buffer;
+
         while (count-- > 0)
         {
             ColorUtilities.HslToRgb(particle->Color[0], particle->Color[1], particle->Color[2], out int r, out int g, out int b);
