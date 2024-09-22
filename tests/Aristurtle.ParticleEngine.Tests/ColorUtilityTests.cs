@@ -3,6 +3,7 @@
 // License information can also be found at https://unlicense.org/.
 
 using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Aristurtle.ParticleEngine.Tests;
 
@@ -38,26 +39,30 @@ public sealed class ColorUtilityTests
 
     [Theory]
     [MemberData(nameof(GetRgbToHslTestData))]
-    public unsafe void Rgb_To_Hsl(string colorName, float r, float g, float b, float h, float s, float l)
+    public unsafe void Rgb_To_Hsl(string colorName, float r, float g, float b, float expectedH, float expectedS, float expectedL)
     {
-        Vector3 expected = new Vector3(h, s, l);
-        Vector3 actual = new Vector3(r, g, b);
-        ColorUtilities.RgbToHsl(&actual);
-        Assert.Equal(expected.X, actual.X, TOLERANCE);
-        Assert.Equal(expected.Y, actual.Y, TOLERANCE);
-        Assert.Equal(expected.Z, actual.Z, TOLERANCE);
+        fixed (float* color = new[] { r, g, b })
+        {
+            var (h, s, l) = ColorUtilities.RgbToHsl(color);
+
+            Assert.Equal(expectedH, h, TOLERANCE);
+            Assert.Equal(expectedS, s, TOLERANCE);
+            Assert.Equal(expectedL, l, TOLERANCE);
+        }
 
     }
 
     [Theory]
     [MemberData(nameof(GetRgbToHslTestData))]
-    public unsafe void Hsl_To_Rgb(string colorName, float r, float g, float b, float h, float s, float l)
+    public unsafe void Hsl_To_Rgb(string colorName, float expectedR, float expectedG, float expectedB, float h, float s, float l)
     {
-        Vector3 expected = new Vector3(r, g, b);
-        Vector3 actual = new Vector3(h, s, l);
-        ColorUtilities.HslToRgb(&actual);
-        Assert.Equal(expected.X, actual.X, TOLERANCE);
-        Assert.Equal(expected.Y, actual.Y, TOLERANCE);
-        Assert.Equal(expected.Z, actual.Z, TOLERANCE);
+        fixed (float* color = new[] { h, s, l })
+        {
+            var (r, g, b) = ColorUtilities.HslToRgb(color);
+
+            Assert.Equal(expectedR, r, TOLERANCE);
+            Assert.Equal(expectedG, g, TOLERANCE);
+            Assert.Equal(expectedB, b, TOLERANCE);
+        }
     }
 }

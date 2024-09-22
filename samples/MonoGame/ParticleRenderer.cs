@@ -60,7 +60,6 @@ public sealed class ParticleRenderer : IDisposable
         sourceRect.Height = emitter.SourceRectangle?.Height ?? texture.Bounds.Height;
 
         Vector2 origin = sourceRect.Center.ToVector2();
-        Particle* particle = (Particle*)emitter.Buffer.NativePointer;
         int count = emitter.ActiveParticles;
 
         IntPtr buffer = Marshal.AllocHGlobal(emitter.Buffer.ActiveSizeInBytes);
@@ -79,29 +78,34 @@ public sealed class ParticleRenderer : IDisposable
 
             Particle* particle = (Particle*)buffer;
 
-        while (count-- > 0)
+            while (count-- > 0)
+            {
+                var (r, g, b) = ColorUtilities.HslToRgb(particle->Color);
+                Color color = new Color(r, g, b);
+
+                if (spriteBatch.GraphicsDevice.BlendState == BlendState.AlphaBlend)
+                {
+                    color *= particle->Opacity;
+                }
+                else
+                {
+                    color.A = (byte)(particle->Opacity * 255);
+                }
+
+                Vector2 position = new Vector2(particle->Position[0], particle->Position[1]);
+                Vector2 scale = new Vector2(particle->Scale);
+                color.A = (byte)MathHelper.Clamp(particle->Opacity * 255, 0, 255);
+                float rotation = particle->Rotation;
+                float layerDepth = particle->LayerDepth;
+
+                spriteBatch.Draw(texture, position, sourceRect, color, rotation, origin, scale, SpriteEffects.None, layerDepth);
+
+                particle++;
+            }
+        }
+        finally
         {
-            ColorUtilities.HslToRgb(particle->Color[0], particle->Color[1], particle->Color[2], out int r, out int g, out int b);
-            Color color = new Color(r, g, b);
-
-            if (spriteBatch.GraphicsDevice.BlendState == BlendState.AlphaBlend)
-            {
-                color *= particle->Opacity;
-            }
-            else
-            {
-                color.A = (byte)(particle->Opacity * 255);
-            }
-
-            Vector2 position = new Vector2(particle->Position[0], particle->Position[1]);
-            Vector2 scale = new Vector2(particle->Scale);
-            color.A = (byte)MathHelper.Clamp(particle->Opacity * 255, 0, 255);
-            float rotation = particle->Rotation;
-            float layerDepth = particle->LayerDepth;
-
-            spriteBatch.Draw(texture, position, sourceRect, color, rotation, origin, scale, SpriteEffects.None, layerDepth);
-
-            particle++;
+            Marshal.FreeHGlobal(buffer);
         }
     }
 

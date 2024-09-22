@@ -8,40 +8,41 @@ namespace Aristurtle.ParticleEngine;
 
 public static class ColorUtilities
 {
-    public static unsafe void HslToRgb(float h, float s, float l, out int r, out int g, out int b)
+    public static unsafe (int r, int g, int b) HslToRgb(float* value)
     {
-        Vector3 value = new Vector3(h, s, l);
-        HslToRgb(&value);
-        r = (int)value.X;
-        g = (int)value.Y;
-        b = (int)value.Z;
+        return HslToRgb(value[0], value[1], value[2]);
     }
 
-    public static unsafe void HslToRgb(Vector3* value)
+    public static (int r, int g, int b) HslToRgb(Vector3 value)
     {
-        double C = (1 - Math.Abs(2 * value->Z - 1)) * value->Y;
-        double X = C * (1 - Math.Abs((value->X / 60) % 2 - 1));
-        double m = value->Z - C / 2;
+        return HslToRgb(value.X, value.Y, value.Z);
+    }
+
+    public static (int r, int g, int b) HslToRgb(float h, float s, float l)
+    {
+        double C = (1 - Math.Abs(2 * l - 1)) * s;
+        double X = C * (1 - Math.Abs((h / 60) % 2 - 1));
+        double m = l - C / 2;
 
         double rPrime, gPrime, bPrime;
 
-        if (value->X < 60)
+        if (h < 60)
         {
             (rPrime, gPrime, bPrime) = (C, X, 0);
         }
-        else if (value->X < 120)
+        else if (h < 120)
         {
             (rPrime, gPrime, bPrime) = (X, C, 0);
         }
-        else if (value->X < 180)
+        else if (h < 180)
         {
             (rPrime, gPrime, bPrime) = (0, C, X);
         }
-        else if (value->X < 240)
+        else if (h < 240)
         {
             (rPrime, gPrime, bPrime) = (0, X, C);
         }
-        else if (value->X < 300)
+        else if (h < 300)
         {
             (rPrime, gPrime, bPrime) = (X, 0, C);
         }
@@ -50,74 +51,81 @@ public static class ColorUtilities
             (rPrime, gPrime, bPrime) = (C, 0, X);
         }
 
-        value->X = (int)Math.Round((rPrime + m) * 255);
-        value->Y = (int)Math.Round((gPrime + m) * 255);
-        value->Z = (int)Math.Round((bPrime + m) * 255);
+        int r = (int)Math.Round((rPrime + m) * 255);
+        int g = (int)Math.Round((gPrime + m) * 255);
+        int b = (int)Math.Round((bPrime + m) * 255);
+
+        return (r, g, b);
     }
 
-    public static unsafe void RgbToHsl(float r, float g, float b, out float h, out float s, out float l)
+    public static unsafe (float h, float s, float l) RgbToHsl(float* value)
     {
-        Vector3 value = new Vector3(r, g, b);
-        RgbToHsl(&value);
-        h = value.X;
-        s = value.Y;
-        l = value.Z;
+        return RgbToHsl(value[0], value[1], value[2]);
     }
 
-    public static unsafe void RgbToHsl(Vector3* value)
+    public static (float h, float s, float l) RgbToHsl(Vector3 value)
     {
-        if (value->X > 1.0f)
+        return RgbToHsl(value.X, value.Y, value.Z);
+    }
+
+    public static (float h, float s, float l) RgbToHsl(float r, float g, float b)
+    {
+        if (r > 1.0f)
         {
-            value->X /= 255.0f;
+            r /= 255.0f;
         }
 
-        if (value->Y > 1.0f)
+        if (g > 1.0f)
         {
-            value->Y /= 255.0f;
+            g /= 255.0f;
         }
 
-        if (value->Z > 1.0f)
+        if (b > 1.0f)
         {
-            value->Z /= 255.0f;
+            b /= 255.0f;
         }
 
-        double max = Math.Max(value->X, Math.Max(value->Y, value->Z));
-        double min = Math.Min(value->X, Math.Min(value->Y, value->Z));
+        double max = Math.Max(r, Math.Max(g, b));
+        double min = Math.Min(r, Math.Min(g, b));
         double delta = max - min;
 
-        if (delta == 0)
-        {
-            value->X = 0;
-        }
-        else if (max == value->X)
-        {
-            value->X = (float)(((value->Y - value->Z) / delta) % 6);
-        }
-        else if (max == value->Y)
-        {
-            value->X = (float)((value->Z - value->X) / delta + 2);
-        }
-        else
-        {
-            value->X = (float)((value->X - value->Y) / delta + 4);
-        }
-
-        value->X *= 60;
-
-        if (value->X < 0)
-        {
-            value->X += 360.0f;
-        }
-
-        value->Z = (float)((max + min) / 2);
+        float h, s, l;
 
         if (delta == 0)
         {
-            value->Y = 0;
+            h = 0;
+        }
+        else if (max == r)
+        {
+            h = (float)(((g - b) / delta) % 6);
+        }
+        else if (max == g)
+        {
+            h = (float)((b - r) / delta + 2);
         }
         else
         {
-            value->Y = (float)(delta / (1 - Math.Abs(2 * value->Z - 1)));
+            h = (float)((r - g) / delta + 4);
         }
+
+        h *= 60;
+
+        if (h < 0)
+        {
+            h += 360.0f;
+        }
+
+        l = (float)((max + min) / 2);
+
+        if (delta == 0)
+        {
+            s = 0;
+        }
+        else
+        {
+            s = (float)(delta / (1 - Math.Abs(2 * l - 1)));
+        }
+
+        return (h, s, l);
     }
 }
