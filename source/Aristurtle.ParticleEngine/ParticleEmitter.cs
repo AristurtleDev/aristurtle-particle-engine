@@ -20,50 +20,20 @@ public sealed unsafe class ParticleEmitter : IDisposable
 
     public ParticleBuffer Buffer;
 
-    [JsonPropertyName("name")]
     public string Name;
-
-    [JsonPropertyName("capacity")]
     public int Capacity => Buffer.Size;
-
-    [JsonPropertyName("lifespan")]
     public float LifeSpan;
-
-    [JsonPropertyName("offset")]
     public Vector2 Offset;
-
-    [JsonPropertyName("layerDepth")]
-    [Display(Name = "Layer Depth", Description = "The layer")]
     public float LayerDepth;
-
-    [JsonPropertyName("autoTrigger")]
     public bool AutoTrigger;
-
-    [JsonPropertyName("autoTriggerFrequency")]
     public float AutoTriggerFrequency;
-
-    [JsonPropertyName("reclaimFrequency")]
     public float ReclaimFrequency;
-
-    [JsonPropertyName("parameters")]
     public ParticleReleaseParameters Parameters { get; set; }
-
-    [JsonPropertyName("strategy")]
     public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
-
-    [JsonPropertyName("modifiers")]
     public List<Modifier> Modifiers;
-
-    [JsonPropertyName("profile")]
     public Profile Profile;
-
-    [JsonPropertyName("texture")]
     public string TextureName;
-
-    [JsonPropertyName("sourceRectangle")]
     public Rectangle? SourceRectangle { get; set; }
-
-    [JsonPropertyName("renderingOrder")]
     public ParticleRenderingOrder RenderingOrder { get; set; }
 
     [JsonIgnore]
