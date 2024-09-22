@@ -63,6 +63,9 @@ public sealed unsafe class ParticleEmitter : IDisposable
     [JsonPropertyName("sourceRectangle")]
     public Rectangle? SourceRectangle { get; set; }
 
+    [JsonPropertyName("renderingOrder")]
+    public ParticleRenderingOrder RenderingOrder { get; set; }
+
     [JsonIgnore]
     public bool IsDisposed { get; private set; }
 
