@@ -27,8 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{636A2FFD
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aristurtle.ParticleEngine.SerializationSample", "samples\Aristurtle.ParticleEngine.SerializationSample\Aristurtle.ParticleEngine.SerializationSample.csproj", "{F4A67385-FBF6-4D66-8952-7FE0096B80D9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{E796A812-C077-4FE2-A5C6-35ED6307E6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E796A812-C077-4FE2-A5C6-35ED6307E6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E796A812-C077-4FE2-A5C6-35ED6307E6DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4A67385-FBF6-4D66-8952-7FE0096B80D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4A67385-FBF6-4D66-8952-7FE0096B80D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4A67385-FBF6-4D66-8952-7FE0096B80D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4A67385-FBF6-4D66-8952-7FE0096B80D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,7 +54,6 @@ Global
 		{3727D2BA-1236-4F99-B52D-6CB90735E401} = {5BC54C91-FE8F-4A4E-8BEB-AB8CDB60D819}
 		{CF570067-7A69-4D00-B233-197DDA8B4413} = {841D7515-CA6D-47E4-BDB0-B3D127341A70}
 		{E796A812-C077-4FE2-A5C6-35ED6307E6DF} = {CF570067-7A69-4D00-B233-197DDA8B4413}
-		{F4A67385-FBF6-4D66-8952-7FE0096B80D9} = {841D7515-CA6D-47E4-BDB0-B3D127341A70}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43A8AC31-AA35-48F9-BB60-AA803A128D49}
