@@ -8,7 +8,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Version>6.0.0</Version>
+        <Version>1.0.0</Version>
         <Copyright>Released under The Unlicense.  For more information please refer to https://unlicense.org.</Copyright>
         <Authors>Original Author: Matt Davey; Current Maintainers: Christopher Whitley and contributors.</Authors>
     </PropertyGroup>
