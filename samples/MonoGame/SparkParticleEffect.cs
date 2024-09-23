@@ -8,7 +8,7 @@ using Aristurtle.ParticleEngine.Modifiers;
 using Aristurtle.ParticleEngine.Modifiers.Containers;
 using Aristurtle.ParticleEngine.Profiles;
 
-namespace Aristurtle.ParticleEngine.MonoGame.Sample.ParticleEffects;
+namespace Aristurtle.ParticleEngine.MonoGame.Sample;
 
 public sealed class SparkParticleEffect : ParticleEffect
 {
