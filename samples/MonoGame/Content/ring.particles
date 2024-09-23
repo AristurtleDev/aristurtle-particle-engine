@@ -1,0 +1,83 @@
+{
+  "Name": "ParticleEffect",
+  "Position": "0,0",
+  "Rotation": 0,
+  "Scale": "1,1",
+  "Emitters": [
+    {
+      "Name": "ParticleEmitter",
+      "Capacity": 2000,
+      "LifeSpan": 3,
+      "Offset": "0,0",
+      "LayerDepth": 0,
+      "AutoTrigger": false,
+      "AutoTriggerFrequency": 1,
+      "ReclaimFrequency": 5,
+      "Parameters": {
+        "Color": {
+          "Kind": "Random",
+          "RandomMin": "210,0.5,0.6",
+          "RandomMax": "230,0.7,0.8"
+        },
+        "Mass": {
+          "Kind": "Random",
+          "RandomMin": 4,
+          "RandomMax": 12
+        },
+        "Opacity": {
+          "Kind": "Constant",
+          "Constant": 1
+        },
+        "Quantity": {
+          "Kind": "Constant",
+          "Constant": 1
+        },
+        "Rotation": {
+          "Kind": "Random",
+          "RandomMin": -3.1415927,
+          "RandomMax": 3.1415927
+        },
+        "Scale": {
+          "Kind": "Constant",
+          "Constant": 0.5
+        },
+        "Speed": {
+          "Kind": "Random",
+          "RandomMin": 300,
+          "RandomMax": 700
+        }
+      },
+      "ModifierExecutionStrategy": "Serial",
+      "Modifiers": [
+        {
+          "Name": "LinearGravityModifier",
+          "Frequency": 20,
+          "Type": "LinearGravityModifier",
+          "Direction": "-0,-1",
+          "Strength": 100
+        },
+        {
+          "Name": "OpacityFastFadeModifier",
+          "Frequency": 10,
+          "Type": "OpacityFastFadeModifier"
+        },
+        {
+          "Name": "RectangleContainerModifier",
+          "Frequency": 15,
+          "Type": "RectangleContainerModifier",
+          "Width": 1280,
+          "Height": 720,
+          "RestitutionCoefficient": 0.75
+        }
+      ],
+      "Profile": {
+        "Type": "SprayProfile",
+        "Direction": "-0,-1",
+        "Spread": 0.5
+      },
+      "TextureKey": "Ring001",
+      "SourceRectangle": null,
+      "RenderingOrder": "FrontToBack"
+    }
+  ]
+}
