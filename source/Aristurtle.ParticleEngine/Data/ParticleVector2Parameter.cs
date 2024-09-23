@@ -11,8 +11,8 @@ namespace Aristurtle.ParticleEngine.Data;
 public struct ParticleVector2Parameter : IEquatable<ParticleVector2Parameter>
 {
     public Vector2 Constant;
-    public Vector2 RangeStart;
-    public Vector2 RangeEnd;
+    public Vector2 RandomMin;
+    public Vector2 RandomMax;
     public ParticleValueKind Kind;
 
     public Vector2 Value
@@ -20,54 +20,54 @@ public struct ParticleVector2Parameter : IEquatable<ParticleVector2Parameter>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get
         {
-            if (Kind == ParticleValueKind.Static)
+            if (Kind == ParticleValueKind.Constant)
             {
                 return Constant;
             }
 
             Vector2 v;
-            v.X = FastRandom.NextSingle(RangeStart.X, RangeEnd.X);
-            v.Y = FastRandom.NextSingle(RangeStart.Y, RangeEnd.Y);
+            v.X = FastRandom.NextSingle(RandomMin.X, RandomMax.X);
+            v.Y = FastRandom.NextSingle(RandomMin.Y, RandomMax.Y);
             return v;
         }
     }
 
     public ParticleVector2Parameter(Vector2 value)
     {
-        Kind = ParticleValueKind.Static;
+        Kind = ParticleValueKind.Constant;
         Constant = value;
-        RangeStart = default;
-        RangeEnd = default;
+        RandomMin = default;
+        RandomMax = default;
     }
 
     public ParticleVector2Parameter(Vector2 rangeStart, Vector2 rangeEnd)
     {
         Kind = ParticleValueKind.Random;
         Constant = default;
-        RangeStart = rangeStart;
-        RangeEnd = rangeEnd;
+        RandomMin = rangeStart;
+        RandomMax = rangeEnd;
     }
 
-    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is ParticleVector2Parameter other && Equals(other);
+    public override readonly bool Equals([NotNullWhen(true)] object obj) => obj is ParticleVector2Parameter other && Equals(other);
 
     public readonly bool Equals(ParticleVector2Parameter other)
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
             return Constant.Equals(other.Constant);
         }
 
-        return RangeStart.Equals(other.RangeStart) && RangeEnd.Equals(other.RangeEnd);
+        return RandomMin.Equals(other.RandomMin) && RandomMax.Equals(other.RandomMax);
     }
 
     public override readonly int GetHashCode()
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
             return Constant.GetHashCode();
         }
 
-        return HashCode.Combine(RangeStart, RangeEnd);
+        return HashCode.Combine(RandomMin, RandomMax);
     }
 
     public static bool operator ==(ParticleVector2Parameter a, ParticleVector2Parameter b) => a.Equals(b);

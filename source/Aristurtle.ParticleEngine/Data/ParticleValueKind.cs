@@ -6,6 +6,6 @@ namespace Aristurtle.ParticleEngine.Data;
 
 public enum ParticleValueKind
 {
-    Static,
+    Constant,
     Random
 }

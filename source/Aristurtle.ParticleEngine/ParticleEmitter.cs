@@ -4,6 +4,7 @@
 
 using System.Drawing;
 using System.Numerics;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Aristurtle.ParticleEngine.Data;
 using Aristurtle.ParticleEngine.Modifiers;
@@ -18,28 +19,24 @@ public sealed unsafe class ParticleEmitter : IDisposable
     private float _nextAutoTrigger;
 
     public ParticleBuffer Buffer;
-
     public string Name;
     public int Capacity => Buffer.Size;
+    public int ActiveParticles => Buffer.Count;
     public float LifeSpan;
     public Vector2 Offset;
     public float LayerDepth;
     public bool AutoTrigger;
     public float AutoTriggerFrequency;
     public float ReclaimFrequency;
-    public ParticleReleaseParameters Parameters { get; set; }
-    public ModifierExecutionStrategy ModifierExecutionStrategy { get; set; }
+    public ParticleReleaseParameters Parameters;
+    public ModifierExecutionStrategy ModifierExecutionStrategy;
     public List<Modifier> Modifiers;
     public Profile Profile;
     public string TextureKey;
-    public Rectangle? SourceRectangle { get; set; }
-    public ParticleRenderingOrder RenderingOrder { get; set; }
+    public Rectangle? SourceRectangle;
+    public ParticleRenderingOrder RenderingOrder;
 
-    [JsonIgnore]
     public bool IsDisposed { get; private set; }
-
-    [JsonIgnore]
-    public int ActiveParticles => Buffer.Count;
 
     public ParticleEmitter() : this(1000) { }
 

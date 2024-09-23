@@ -27,7 +27,7 @@ public readonly struct LineSegment : IEquatable<LineSegment>
 
     public static LineSegment FromOrigin(Vector2 origin, Vector2 vector) => new LineSegment(origin, origin + vector);
 
-    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is LineSegment other && Equals(other);
+    public override readonly bool Equals([NotNullWhen(true)] object obj) => obj is LineSegment other && Equals(other);
 
     public readonly bool Equals(LineSegment other) => _point1.Equals(other._point1) &&
                                                       _point2.Equals(other._point2);

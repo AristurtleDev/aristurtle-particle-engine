@@ -5,24 +5,26 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace Aristurtle.ParticleEngine.Data;
 
 public struct ParticleInt32Parameter : IEquatable<ParticleInt32Parameter>
 {
-    public int Static;
+    public int Constant;
     public int RandomMin;
     public int RandomMax;
     public ParticleValueKind Kind;
 
+    [JsonIgnore]
     public int Value
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get
         {
-            if (Kind == ParticleValueKind.Static)
+            if (Kind == ParticleValueKind.Constant)
             {
-                return Static;
+                return Constant;
             }
 
             return FastRandom.Next(RandomMin, RandomMax);
@@ -31,8 +33,8 @@ public struct ParticleInt32Parameter : IEquatable<ParticleInt32Parameter>
 
     public ParticleInt32Parameter(int value)
     {
-        Kind = ParticleValueKind.Static;
-        Static = value;
+        Kind = ParticleValueKind.Constant;
+        Constant = value;
         RandomMin = default;
         RandomMax = default;
     }
@@ -40,18 +42,18 @@ public struct ParticleInt32Parameter : IEquatable<ParticleInt32Parameter>
     public ParticleInt32Parameter(int rangeStart, int rangeEnd)
     {
         Kind = ParticleValueKind.Random;
-        Static = default;
+        Constant = default;
         RandomMin = rangeStart;
         RandomMax = rangeEnd;
     }
 
-    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is ParticleInt32Parameter other && Equals(other);
+    public override readonly bool Equals([NotNullWhen(true)] object obj) => obj is ParticleInt32Parameter other && Equals(other);
 
     public readonly bool Equals(ParticleInt32Parameter other)
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
-            return Static.Equals(other.Static);
+            return Constant.Equals(other.Constant);
         }
 
         return RandomMin.Equals(other.RandomMin) && RandomMax.Equals(other.RandomMax);
@@ -59,9 +61,9 @@ public struct ParticleInt32Parameter : IEquatable<ParticleInt32Parameter>
 
     public override readonly int GetHashCode()
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
-            return Static.GetHashCode();
+            return Constant.GetHashCode();
         }
 
         return HashCode.Combine(RandomMin, RandomMax);
@@ -69,9 +71,9 @@ public struct ParticleInt32Parameter : IEquatable<ParticleInt32Parameter>
 
     public override readonly string ToString()
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
-            return Static.ToString(CultureInfo.InvariantCulture);
+            return Constant.ToString(CultureInfo.InvariantCulture);
         }
 
         return string.Format(NumberFormatInfo.InvariantInfo, "{0}{1}{2}", RandomMin, NumberFormatInfo.InvariantInfo.NumberGroupSeparator, RandomMax);

@@ -10,7 +10,7 @@ namespace Aristurtle.ParticleEngine.Data;
 
 public struct ParticleFloatParameter : IEquatable<ParticleFloatParameter>
 {
-    public float Static;
+    public float Constant;
     public float RandomMin;
     public float RandomMax;
     public ParticleValueKind Kind;
@@ -20,9 +20,9 @@ public struct ParticleFloatParameter : IEquatable<ParticleFloatParameter>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get
         {
-            if (Kind == ParticleValueKind.Static)
+            if (Kind == ParticleValueKind.Constant)
             {
-                return Static;
+                return Constant;
             }
 
             return FastRandom.NextSingle(RandomMin, RandomMax);
@@ -31,8 +31,8 @@ public struct ParticleFloatParameter : IEquatable<ParticleFloatParameter>
 
     public ParticleFloatParameter(float value)
     {
-        Kind = ParticleValueKind.Static;
-        Static = value;
+        Kind = ParticleValueKind.Constant;
+        Constant = value;
         RandomMin = default;
         RandomMax = default;
     }
@@ -40,18 +40,18 @@ public struct ParticleFloatParameter : IEquatable<ParticleFloatParameter>
     public ParticleFloatParameter(float rangeStart, float rangeEnd)
     {
         Kind = ParticleValueKind.Random;
-        Static = default;
+        Constant = default;
         RandomMin = rangeStart;
         RandomMax = rangeEnd;
     }
 
-    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is ParticleFloatParameter other && Equals(other);
+    public override readonly bool Equals([NotNullWhen(true)] object obj) => obj is ParticleFloatParameter other && Equals(other);
 
     public readonly bool Equals(ParticleFloatParameter other)
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
-            return Static.Equals(other.Static);
+            return Constant.Equals(other.Constant);
         }
 
         return RandomMin.Equals(other.RandomMin) && RandomMax.Equals(other.RandomMax);
@@ -59,9 +59,9 @@ public struct ParticleFloatParameter : IEquatable<ParticleFloatParameter>
 
     public override readonly int GetHashCode()
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
-            return Static.GetHashCode();
+            return Constant.GetHashCode();
         }
 
         return HashCode.Combine(RandomMin, RandomMax);
@@ -69,9 +69,9 @@ public struct ParticleFloatParameter : IEquatable<ParticleFloatParameter>
 
     public override readonly string ToString()
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
-            return Static.ToString(CultureInfo.InvariantCulture);
+            return Constant.ToString(CultureInfo.InvariantCulture);
         }
 
         return string.Format(NumberFormatInfo.InvariantInfo, "{0}{1}{2}", RandomMin, NumberFormatInfo.InvariantInfo.NumberGroupSeparator, RandomMax);

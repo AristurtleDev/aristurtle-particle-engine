@@ -3,17 +3,24 @@
 // License information can also be found at https://unlicense.org/.
 
 using System.Numerics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Aristurtle.ParticleEngine.Serialization.Json;
 
 namespace Aristurtle.ParticleEngine;
 
 public class ParticleEffect : IDisposable
 {
-    public string Name { get; set; }
-    public Vector2 Position { get; set; }
-    public float Rotation { get; set; }
-    public Vector2 Scale { get; set; }
-    public List<ParticleEmitter> Emitters { get; set; }
+    public string Name;
+    public Vector2 Position;
+    public float Rotation;
+    public Vector2 Scale;
+    public List<ParticleEmitter> Emitters;
+
+    [JsonIgnore]
     public bool IsDisposed { get; private set; }
+
+    [JsonIgnore]
     public int ActiveParticles => Emitters.Sum(t => t.ActiveParticles);
 
     public ParticleEffect(string name)

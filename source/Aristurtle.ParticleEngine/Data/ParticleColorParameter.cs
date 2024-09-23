@@ -5,12 +5,13 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace Aristurtle.ParticleEngine.Data;
 
 public struct ParticleColorParameter : IEquatable<ParticleColorParameter>
 {
-    public Vector3 Static;
+    public Vector3 Constant;
     public Vector3 RandomMin;
     public Vector3 RandomMax;
     public ParticleValueKind Kind;
@@ -20,9 +21,9 @@ public struct ParticleColorParameter : IEquatable<ParticleColorParameter>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get
         {
-            if (Kind == ParticleValueKind.Static)
+            if (Kind == ParticleValueKind.Constant)
             {
-                return Static;
+                return Constant;
             }
             else
             {
@@ -37,9 +38,9 @@ public struct ParticleColorParameter : IEquatable<ParticleColorParameter>
 
     public ParticleColorParameter(Vector3 value)
     {
-        Kind = ParticleValueKind.Static;
+        Kind = ParticleValueKind.Constant;
 
-        Static = value;
+        Constant = value;
 
         RandomMin = default;
         RandomMax = default;
@@ -48,19 +49,19 @@ public struct ParticleColorParameter : IEquatable<ParticleColorParameter>
     public ParticleColorParameter(Vector3 rangeStart, Vector3 rangeEnd)
     {
         Kind = ParticleValueKind.Random;
-        Static = default;
+        Constant = default;
 
         RandomMin = rangeStart;
         RandomMax = rangeEnd;
     }
 
-    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is ParticleColorParameter other && Equals(other);
+    public override readonly bool Equals([NotNullWhen(true)] object obj) => obj is ParticleColorParameter other && Equals(other);
 
     public readonly bool Equals(ParticleColorParameter other)
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
-            return Static.Equals(other.Static);
+            return Constant.Equals(other.Constant);
         }
 
         return RandomMin.Equals(other.RandomMin) && RandomMax.Equals(other.RandomMax);
@@ -68,7 +69,7 @@ public struct ParticleColorParameter : IEquatable<ParticleColorParameter>
 
     public override readonly int GetHashCode()
     {
-        if (Kind == ParticleValueKind.Static)
+        if (Kind == ParticleValueKind.Constant)
         {
             return Kind.GetHashCode();
         }
