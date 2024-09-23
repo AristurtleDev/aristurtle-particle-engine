@@ -126,7 +126,7 @@ internal sealed class ProfileJsonConverter : JsonConverter<Profile>
                 break;
 
             case SprayProfile spray:
-                writer.WriteString(nameof(Type), nameof(LineProfile));
+                writer.WriteString(nameof(Type), nameof(SprayProfile));
                 writer.WritePropertyName(nameof(SprayProfile.Direction));
                 JsonSerializer.Serialize(writer, spray.Direction, options);
                 writer.WriteNumber(nameof(SprayProfile.Spread), spray.Spread);
