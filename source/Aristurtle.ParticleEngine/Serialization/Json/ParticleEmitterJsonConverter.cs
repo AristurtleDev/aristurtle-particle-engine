@@ -98,7 +98,7 @@ internal sealed class ParticleEmitterJsonConverter : JsonConverter<ParticleEmitt
                     break;
 
                 case nameof(ParticleEmitter.SourceRectangle):
-                    emitter.SourceRectangle = JsonSerializer.Deserialize<Rectangle>(ref reader, options);
+                    emitter.SourceRectangle = JsonSerializer.Deserialize<Rectangle?>(ref reader, options);
                     break;
 
                 case nameof(ParticleEmitter.RenderingOrder):

@@ -9,16 +9,21 @@ using System.Text.Json.Serialization;
 
 namespace Aristurtle.ParticleEngine.Serialization.Json;
 
-internal sealed class RectangleJsonConverter : JsonConverter<Rectangle>
+internal sealed class RectangleJsonConverter : JsonConverter<Rectangle?>
 {
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert == typeof(Rectangle);
+        return typeToConvert == typeof(Rectangle) ||
+               typeToConvert == typeof(Rectangle?);
     }
 
-    public override Rectangle Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Rectangle? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType != JsonTokenType.String)
+        if(reader.TokenType == JsonTokenType.Null)
+        {
+            return null;
+        }
+        else if (reader.TokenType != JsonTokenType.String)
         {
             throw new JsonException("JSON string expected");
         }
@@ -61,12 +66,19 @@ internal sealed class RectangleJsonConverter : JsonConverter<Rectangle>
         return new Rectangle(x, y, width, height);
     }
 
-    public override void Write(Utf8JsonWriter writer, Rectangle value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Rectangle? value, JsonSerializerOptions options)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        string format = "{1}{0}{2}{0}{3}{0}{4}";
-        string separator = CultureInfo.InvariantCulture.NumberFormat.NumberGroupSeparator;
-        string output = string.Format(CultureInfo.InvariantCulture, format, separator, value.X, value.Y, value.Width, value.Height);
-        writer.WriteStringValue(output);
+        if (value is Rectangle rect)
+        {
+            string format = "{1}{0}{2}{0}{3}{0}{4}";
+            string separator = CultureInfo.InvariantCulture.NumberFormat.NumberGroupSeparator;
+            string output = string.Format(CultureInfo.InvariantCulture, format, separator, rect.X, rect.Y, rect.Width, rect.Height);
+            writer.WriteStringValue(output);
+        }
+        else
+        {
+            writer.WriteNullValue();
+        }
     }
 }
